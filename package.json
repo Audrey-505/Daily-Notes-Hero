@@ -1,0 +1,23 @@
+{
+  "name": "herokunote",
+  "version": "1.0.0",
+  "description": "daily note taking app that will be deployed with Heroku",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Audrey-505/Daily-Notes-Hero.git"
+  },
+  "keywords": [
+    "express",
+    "node"
+  ],
+  "author": "Audrey Alcantara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Audrey-505/Daily-Notes-Hero/issues"
+  },
+  "homepage": "https://github.com/Audrey-505/Daily-Notes-Hero#readme"
+}
