@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Audrey-505/Daily-Notes-Hero/issues"
   },
-  "homepage": "https://github.com/Audrey-505/Daily-Notes-Hero#readme"
+  "homepage": "https://github.com/Audrey-505/Daily-Notes-Hero#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
