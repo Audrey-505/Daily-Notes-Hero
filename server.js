@@ -69,7 +69,7 @@ app.delete('/api/notes/:id', (req, res) => {
         const parsedIdNotes = JSON.parse(data)
         const result = parsedIdNotes.filter((note) => note.id !== noteId)
         fs.writeFile('./db/db.json', JSON.stringify(result, null, 2),
-            (writeErr) => writeErr ? console.error(writeErr) : console.info ('could not delete'))
+            (writeErr) => writeErr ? console.error(writeErr) : console.info ('successfully deleted'))
         console.log(result)
         res.json(result)
     })

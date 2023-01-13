@@ -1,7 +1,12 @@
 [
   {
+    "title": "Clean",
+    "text": "clean room",
+    "id": "0685079d-625d-4643-aeaf-3402f60f1160"
+  },
+  {
     "title": "Cook",
-    "text": "make dinner",
-    "id": "db0d0976-3e3d-4942-aba7-c4aa64f2f0b8"
+    "text": "make pasta for dinner",
+    "id": "63bd6074-cc1e-48d1-b5bd-4ead7a01bc41"
   }
 ]
