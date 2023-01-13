@@ -3,12 +3,12 @@ const fs = require('fs')
 const app = express()
 const PORT = process.env.PORT || 3001
 
+const { v4: uuidv4 } = require('uuid');
+
 app.use(express.json())
 app.use (express.urlencoded({ extended: true }))
 
 app.use(express.static('public'))
-
-const notes = require('./db/db.json')
 
 
 app.get('/notes', (req, res) => {
@@ -17,7 +17,15 @@ app.get('/notes', (req, res) => {
 })
 
 app.get('/api/notes', (req, res) => {
-    res.status(200).json(notes)
+    //res.status(200).json(notes)
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err)
+        } else {
+            const parsedNotes = JSON.parse(data)
+            res.status(200).json(parsedNotes)
+        }
+    })
     console.log(`${req.method} request made to get the notes file`)
 })
 
@@ -31,7 +39,8 @@ app.post('/api/notes', (req, res) => {
     if (title && text) {
         const newNote = {
             title,
-            text
+            text,
+            id: uuidv4()
         }
         fs.readFile('./db/db.json', 'utf8', (err, data) => {
             if (err) {
@@ -39,7 +48,7 @@ app.post('/api/notes', (req, res) => {
             } else {
                 const parsedNotes = JSON.parse(data)
                 parsedNotes.push(newNote)
-                fs.writeFile('./db/db.json', JSON.stringify(parsedNotes, null, 4),
+                fs.writeFile('./db/db.json', JSON.stringify(parsedNotes, null, 2),
                 (writeErr) => writeErr ? console.error(writeErr) : console.info ('Successfully added note to notes!'))
             }
         })
@@ -52,6 +61,18 @@ app.post('/api/notes', (req, res) => {
     } else {
         res.status(500).json('Error adding note')
     }
+})
+
+app.delete('/api/notes/:id', (req, res) => {
+    const noteId = req.params.id
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        const parsedIdNotes = JSON.parse(data)
+        const result = parsedIdNotes.filter((note) => note.id !== noteId)
+        fs.writeFile('./db/db.json', JSON.stringify(result, null, 2),
+            (writeErr) => writeErr ? console.error(writeErr) : console.info ('could not delete'))
+        console.log(result)
+        res.json(result)
+    })
 })
 
 
